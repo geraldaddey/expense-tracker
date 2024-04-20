@@ -1,3 +1,6 @@
-<template> 
-<h2> Expense Tracker  </h2>
+
+<template>
+    <div class="header">
+        <h2>Expense Tracker</h2>
+    </div>
 </template>
