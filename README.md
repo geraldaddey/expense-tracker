@@ -2,7 +2,9 @@
 
 Expense Tracker is a Vue application designed to help users manage their spendings and income .
 
-Author: Gerald Addey
+Author: Gerald Addey 
+
+
 
 ## Features
 
@@ -35,7 +37,7 @@ Author: Gerald Addey
     npm run serve
     ```
 
-5. Open your browser and visit `http://localhost:5174` to access the Expense Tracker application.
+5. Open your browser and visit `http://localhost:5173` to access the Expense Tracker application.
 
 Note: Ensure you have Node.js and npm installed on your machine before running the above commands.
 
@@ -45,6 +47,8 @@ Note: Ensure you have Node.js and npm installed on your machine before running t
 2. Edit expenses by clicking the "Edit" button next to the expense you want to modify.
 3. Delete expenses by clicking the "Delete" button next to the expense you want to remove.
 4. View expense statistics and visualizations on the dashboard page.
+
+[Preview the Expense Tracker](https://dapper-tapioca-8ec1b2.netlify.app/)
 
 ## Dependencies
 
