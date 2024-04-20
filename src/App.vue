@@ -3,7 +3,7 @@
         <Header />
         <Balance :total="+total"/>
         <IncomeExpense :income="+income" :expense="+expense"/>
-        <TransactionList :transactions="transactions" />
+        <TransactionList :transactions="transactions" @transactionDeleted="handleTransactionDeleted" />
         <AddTransaction @transactionSubmitted="handleTransactionSubmitted"/>
     </div>
 </template>
@@ -18,17 +18,30 @@ import AddTransaction from './components/AddTransaction.vue';
 import { useToast } from 'vue-toastification';
 
 
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+
+onMounted( () => { 
+
+    // check for transactions in local storage 
+    const savedTransactions = JSON.parse( localStorage.getItem( 'transactions' ) );
+
+    if ( savedTransactions ) {  
+        transactions.value = savedTransactions;
+    }
+} )
 
 const toast = useToast();
 
-const transactions = ref( [
-    { id: 1, text: 'Flower', amount: -20 },
-    { id: 2, text: 'Salary', amount: 300 },
-    { id: 3, text: 'Book', amount: -10 },
-    { id: 4, text: 'Camera', amount: 1900 },
-    { id: 5, text: 'Box', amount: -44 }
-] )
+// const transactions = ref( [
+//     { id: 1, text: 'Flower', amount: -20 },
+//     { id: 2, text: 'Salary', amount: 300 },
+//     { id: 3, text: 'Book', amount: -10 },
+//     { id: 4, text: 'Camera', amount: 1900 },
+//     { id: 5, text: 'Box', amount: -44 }
+// ] )
+
+
+const transactions = ref( [])
 
 // console.log(transactions.value)
 
@@ -73,10 +86,18 @@ const handleTransactionSubmitted = ( transactionDetails ) => {
     toast.success('Transaction Added');
 } 
 
+//Delete Transaction 
+const handleTransactionDeleted = ( id ) => { 
+    transactions.value = transactions.value.filter( transaction => transaction.id !== id ) 
+    toast.success('Transaction Deleted');
+    console.log(id)
+}
 
 const generateUniqueId = () => {
     return Math.floor( Math.random() * 100000000 );
 }
+
+
 
 </script>
 
