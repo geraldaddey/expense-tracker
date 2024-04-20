@@ -5,22 +5,23 @@
             {{transaction.text}} <span>{{ transaction.amount  }} GHS </span>
             <button class="delete-btn">x</button>
         </li>
-
-
-        <!-- <li class="minus">
-            Cash <span>GHS 400 </span>
-            <button class="delete-btn">x</button>
-        </li>
-        <li class="plus">
-            Credit <span>GHS 200 </span>
-            <button class="delete-btn">x</button>
-        </li> -->
     </ul>
 </template>
 
+<script setup>
+import { defineProps } from 'vue'; 
 
-<script>
+const props = defineProps( {
+    transactions: { 
+        type: Array,
+        required: true
+    }
+})
+</script>
+
+<!-- <script>
 export default { 
+    // Using the Options API below
     data () {  
         return {
             transactions: [
@@ -31,7 +32,24 @@ export default {
             ]
         }
     }
-    
+
+
+    // Using the Composite API below 
+    setup () {  
+        const transactions = [
+            { id: 1, text: 'Flower', amount: -20 },
+            { id: 2, text: 'Salary', amount: 300 },
+            { id: 3, text: 'Book', amount: -10 },
+            { id: 4, text: 'Camera', amount: 150 }
+        ]
+
+        sortTransactions = () => {
+            transactions.sort((a, b) => b.amount - a.amount)
+        }
+
+        return { transactions, sortTransactions }
+    }
+      
 }
 
-</script>
+</script> -->
