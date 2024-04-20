@@ -30,20 +30,10 @@ onMounted( () => {
     }
 } )
 
-const toast = useToast();
+const toast = useToast()
 
-// const transactions = ref( [
-//     { id: 1, text: 'Flower', amount: -20 },
-//     { id: 2, text: 'Salary', amount: 300 },
-//     { id: 3, text: 'Book', amount: -10 },
-//     { id: 4, text: 'Camera', amount: 1900 },
-//     { id: 5, text: 'Box', amount: -44 }
-// ] )
+const transactions = ref(JSON.parse(localStorage.getItem('transactions')) || [])
 
-
-const transactions = ref( [])
-
-// console.log(transactions.value)
 
 
 // Total Balance
@@ -82,21 +72,30 @@ const handleTransactionSubmitted = ( transactionDetails ) => {
         text: transactionDetails.text,
         amount: transactionDetails.amount
     } ) 
+
+    toast.success( 'Transaction Added' ); 
     
-    toast.success('Transaction Added');
+    saveTransactionsToLocalStorage
+    
 } 
 
 //Delete Transaction 
 const handleTransactionDeleted = ( id ) => { 
     transactions.value = transactions.value.filter( transaction => transaction.id !== id ) 
+    
+    saveTransactionsToLocalStorage 
+    
     toast.success('Transaction Deleted');
-    console.log(id)
 }
 
 const generateUniqueId = () => {
     return Math.floor( Math.random() * 100000000 );
 }
 
+const saveTransactionsToLocalStorage = () => {
+    localStorage.setItem( 'transactions', JSON.stringify( transactions.value ) );
+    console.log("saved to local storage",transactions.value)
+}
 
 
 </script>
